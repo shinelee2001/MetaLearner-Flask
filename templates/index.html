@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>1,4,7,14 Studying</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{url_for('static', filename='style.css')}}"
+        />
+    </head>
+    <body>
+        <h1>1,4,7,14 Studying</h1>
+        <h3>Revise what you have learned so far every 1,4,7,14 days!</h3>
+
+        <div id="nav">
+            <a href="#main">Main</a>
+            <a href="#addNotes">Add Notes</a>
+            <a href="#viewNotes">View Notes</a>
+            <a href="#commingUp">Comming Up</a>
+            <a href="#quiz">QUIZ</a>
+        </div>
+
+        <div id="AddNotes" class="main">
+            <h2>ADD NOTES</h2>
+            <form id="addCourseForm">
+                <label for="addCourse">Add Course:</label>
+                <input type="text" id="addCourse" name="addCourse" />
+                <button type="button" onclick="courseAdd()">ADD</button>
+            </form>
+
+            <form
+                action="{{url_for('save')}}"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                <label for="course">Course:</label>
+                <select name="course" id="course">
+                    <option>Select The Course</option>
+                    {% for course_name in course_names %}
+                    <option>{{course_name[0]}}</option>
+                    {% endfor %}
+                </select>
+                <label for="contentType">Content Type:</label>
+                <select name="contentType" id="contentType">
+                    <option>Definition</option>
+                    <option>Axiom</option>
+                    <option>Lemma</option>
+                    <option>Theorem</option>
+                    <option>Corollary</option>
+                    <option>Note(Extras)</option>
+                </select>
+                <br /><br />
+                <label for="content">Content:</label>
+                <textarea name="content" id="content"></textarea>
+                <br /><br />
+                <input type="submit" value="SAVE" />
+            </form>
+
+            {% with messages = get_flashed_messages(with_categories=true) %} {%
+            if messages %} {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %} {% endif %} {% endwith %}
+        </div>
+
+        <div id="ViewNotes" class="main">
+            <h2>VIEW THE LIST OF NOTES</h2>
+
+            {%for course_name in course_names%}
+            <h3>Course: {{course_name[0]}}</h3>
+            <table border="1px">
+                <thead>
+                    <tr>
+                        <th>Content Type</th>
+                        <th>Contents</th>
+                        <th>Date Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in study_data %} {% if row[3] == course_name[0]
+                    %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                    </tr>
+                    {% endif %} {% endfor %}
+                </tbody>
+            </table>
+            {%endfor%}
+        </div>
+
+        <div id="CommingUp" class="main">
+            <h2>Comming Up</h2>
+
+            <h3>Course:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day 1</th>
+                        <th>Day 4</th>
+                        <th>Day 7</th>
+                        <th>Day 14</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="Quiz" class="main">Content for Quiz</div>
+
+        <script src="{{ url_for('static', filename='courseModifier.js') }}"></script>
+        <script src="{{ url_for('static', filename='navModifier.js') }}"></script>
+    </body>
+</html>

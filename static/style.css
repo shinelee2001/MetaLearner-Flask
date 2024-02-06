@@ -1,0 +1,154 @@
+/* Navbar */
+#nav {
+    background-color: #007bff;
+    overflow: hidden;
+}
+
+#nav a {
+    float: left;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+#nav a:hover {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+#nav a.active {
+    background-color: #f0f0f0;
+    color: black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+/* AddNotes */
+#AddNotes {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#AddNotes h2 {
+    color: #333;
+    font-size: 24px;
+}
+
+#AddNotes form {
+    margin-top: 10px;
+}
+
+#AddNotes label {
+    font-size: large;
+    font-weight: bolder;
+}
+
+#AddNotes select,
+#AddNotes textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#AddNotes input[type='text'] {
+    flex: 1;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#AddNotes textarea {
+    resize: both;
+    min-height: 100px;
+}
+
+#AddNotes button,
+#AddNotes input[type='submit'] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+
+#AddNotes button:hover {
+    background-color: #0056b3;
+}
+
+/* ViewNotes */
+
+#ViewNotes {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#ViewNotes h2 {
+    color: black;
+    font-size: 24px;
+}
+
+#ViewNotes table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#ViewNotes th,
+#ViewNotes td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+#ViewNotes th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#ViewNotes tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Comming Up */
+#CommingUp {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#CommingUp table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#CommingUp th,
+#CommingUp td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+#CommingUp th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#CommingUp tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
