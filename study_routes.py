@@ -43,23 +43,37 @@ def fetch_sorted_study_data():
     conn.close()
     return data
 
+
 @study_bp.route("/")
 def index():
     study_data = fetch_sorted_study_data()
     course_names = get_course_names()
-    
-    # Sort the data w.r.t date diff (compared to current date)
+
+    # Sort the data where date diff is max 3
     current_date = datetime.now().date()
-    filtered_data = []
+    date_diff_one = []
     for entry in study_data:
         saved_date = entry[2].split()[0]
         saved_datetime = datetime.strptime(saved_date, "%Y-%m-%d").date()
         diff = (current_date - saved_datetime).days
-        if (diff < 3):
-            filtered_data.append(entry)
-    
+        if diff <= 1:
+            date_diff_one.append(entry)
+
+    date_diff_four = []
+    for entry in study_data:
+        saved_date = entry[2].split()[0]
+        saved_datetime = datetime.strptime(saved_date, "%Y-%m-%d").date()
+        diff = (current_date - saved_datetime).days
+        if diff <= 4 and diff > 1:
+            date_diff_four.append(entry)
+
+    data_by_date = [date_diff_one, date_diff_four]
+
     return render_template(
-        "index.html", study_data=study_data, course_names=course_names, date_diff_by_one=filtered_data
+        "index.html",
+        study_data=study_data,
+        course_names=course_names,
+        data_by_date=data_by_date,
     )
 
 
