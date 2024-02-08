@@ -24,15 +24,6 @@ def create_db_table():
     conn.close()
 
 
-def fetch_study_data():
-    conn = sqlite3.connect("study.db")
-    cursor = conn.cursor()
-    cursor.execute("SELECT content_type, content, saved_date, course FROM study")
-    data = cursor.fetchall()
-    conn.close()
-    return data
-
-
 def get_course_names():
     conn = sqlite3.connect("study.db")
     cursor = conn.cursor()
@@ -41,14 +32,37 @@ def get_course_names():
     conn.close()
     return course_names
 
+
+def fetch_sorted_study_data():
+    conn = sqlite3.connect("study.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT content_type, content, saved_date, course FROM study ORDER BY saved_date"
+    )
+    data = cursor.fetchall()
+    conn.close()
+    return data
+
 @study_bp.route("/")
 def index():
-    study_data = fetch_study_data()
+    study_data = fetch_sorted_study_data()
     course_names = get_course_names()
-    return render_template(
-        "index.html", study_data=study_data, course_names=course_names
-    )
     
+    # Sort the data w.r.t date diff (compared to current date)
+    current_date = datetime.now().date()
+    filtered_data = []
+    for entry in study_data:
+        saved_date = entry[2].split()[0]
+        saved_datetime = datetime.strptime(saved_date, "%Y-%m-%d").date()
+        diff = (current_date - saved_datetime).days
+        if (diff < 3):
+            filtered_data.append(entry)
+    
+    return render_template(
+        "index.html", study_data=study_data, course_names=course_names, date_diff_by_one=filtered_data
+    )
+
+
 @study_bp.route("/save", methods=["POST"])
 def save():
     create_db_table()
@@ -72,4 +86,4 @@ def save():
     conn.close()
 
     flash("Saved Successfully!", "success")
-    return redirect(url_for("index"))
+    return redirect(url_for("study.index"))
