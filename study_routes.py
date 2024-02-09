@@ -88,7 +88,7 @@ def save():
 
     if course == "None" or course == "Select The Course":
         flash("Select the course!", "error")
-        return redirect(url_for("index"))
+        return redirect(url_for("study.index"))
 
     conn = sqlite3.connect("study.db")
     cursor = conn.cursor()

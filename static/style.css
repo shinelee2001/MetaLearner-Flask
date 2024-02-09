@@ -1,3 +1,18 @@
+/* Overall Layout */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 /* Navbar */
 #nav {
     background-color: #007bff;
@@ -8,96 +23,151 @@
     float: left;
     color: #fff;
     text-align: center;
-    font-weight: bold;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 #nav a:hover {
-    background-color: #f0f0f0;
-    color: black;
+    background-color: #0056b3;
 }
 
 #nav a.active {
-    background-color: #f0f0f0;
-    color: black;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    background-color: #0056b3;
 }
 
 /* AddNotes */
 #AddNotes {
-    background-color: #f0f0f0;
+    background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #AddNotes h2 {
     color: #333;
     font-size: 24px;
+    margin-bottom: 15px;
 }
 
 #AddNotes form {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 #AddNotes label {
-    font-size: large;
-    font-weight: bolder;
+    font-size: 18px;
+    color: #555;
 }
 
-#AddNotes select,
+#AddNotes #addCourse,
 #AddNotes textarea {
     width: 100%;
-    padding: 8px;
-    margin: 5px 0px 10px;
+    padding: 12px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
 }
 
-#AddNotes input[type='text'] {
-    flex: 1;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+#AddNotes button {
+    width: 70px;
+    padding: 12px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+#AddNotes #addCourse:focus,
+#AddNotes textarea:focus {
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 #AddNotes textarea {
-    resize: both;
     min-height: 100px;
+    width: calc(100% - 20px);
 }
 
-#AddNotes button,
-#AddNotes input[type='submit'] {
+#AddNotes #addCourse {
+    width: 30%;
+}
+
+#AddNotes button {
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    cursor: pointer;
     border-radius: 5px;
-    font-weight: bolder;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 #AddNotes button:hover {
     background-color: #0056b3;
 }
 
-/* ViewNotes */
+/* Style the select element */
+#AddNotes select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    font-weight: normal;
+}
 
+#AddNotes option {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+#AddNotes select:focus {
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#AddNotes input[type='submit'] {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#AddNotes input[type='submit']:hover {
+    background-color: #0056b3;
+}
+
+/* ViewNotes */
 #ViewNotes {
-    background-color: #f0f0f0;
+    background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
 #ViewNotes h2 {
-    color: black;
+    color: #333;
     font-size: 24px;
 }
 
@@ -125,10 +195,15 @@
 
 /* Comming Up */
 #CommingUp {
-    background-color: #f0f0f0;
+    background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
+}
+
+#CommingUp h2 {
+    color: #333;
+    font-size: 24px;
 }
 
 #CommingUp table {
