@@ -7,8 +7,8 @@ import sqlite3
 fileConvert_bp = main_bp = Blueprint("fileConvert", __name__)
 
 
-@fileConvert_bp.route("/convert", methods=["POST"])
-def convert():
+@fileConvert_bp.route("/preview", methods=["POST"])
+def preview():
     create_db_table()
 
     saved_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
