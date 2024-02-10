@@ -68,23 +68,23 @@ body {
 .slide {
     display: none;
     margin: 0 auto;
-    width: 80vw;
+    width: 100%;
     background-color: #007bff;
     height: 20vh;
     text-align: center;
-    font-weight: bold;
     color: white;
     border-radius: 10px;
 }
 
 .slide header {
-    padding: 20px 0px;
+    padding: 20px 0px 0px;
     font-size: xx-large;
 }
 
 .slide p {
-    padding: 0px 5px 20px;
+    padding: 0px 5px 10px;
     font-size:medium;
+    font-weight: bold;
 }
 
 .active {
