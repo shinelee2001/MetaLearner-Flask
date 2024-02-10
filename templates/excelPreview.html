@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>1,4,7,14 Studying</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{url_for('static', filename='previewStyle.css')}}"
+        />
+    </head>
+    <body>
+        {% block content %}
+            {% for index, note in notes.iterrows() %}
+            <h3>Course: {{ note['course'] }}</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Content Type</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Date Uploaded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ note['content_type'] }}</td>
+                        <td>{{ note['title'] }}</td>
+                        <td>{{ note['content'] }}</td>
+                        <td>{{ note['saved_date'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endfor %}
+        {% endblock %}
+    </body>
+</html>

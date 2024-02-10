@@ -74,16 +74,15 @@ body {
     text-align: center;
     color: white;
     border-radius: 10px;
+    font-size: xx-large;
 }
 
 .slide header {
     padding: 20px 0px 0px;
-    font-size: xx-large;
 }
 
 .slide p {
-    padding: 0px 5px 10px;
-    font-size:medium;
+    padding: 0px 0px 5px;
     font-weight: bold;
 }
 
@@ -139,6 +138,7 @@ body {
 #AddNotes label {
     font-size: 18px;
     color: #555;
+    font-weight: bold;
 }
 
 #AddNotes #addCourse,

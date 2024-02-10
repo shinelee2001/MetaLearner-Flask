@@ -25,6 +25,12 @@
                 Do you often forget what you learned in class? Then this is the perfect place for you!<br>
                 You just add notes, we will show them every 1, 4, 7 and 14 days so that they remains in your long-term memory!
             </p>
+            <hr>
+
+            <h1>We hereby support TeX format!</h1>
+            <p>Are you concerned with mathematic expressions? <br>
+                Don't worry. Write expressions as if you are editing .tex document!</p>
+            <hr>
 
             <h1>See what features are available!</h1>
             <div class="carousel">
@@ -50,6 +56,7 @@
                 <button class="prev" onclick="prevSlide()"><</button>
                 <button class="next" onclick="nextSlide()">></button>
             </div>
+            <hr>
         </div>
 
         <div id="AddNotes" class="main">
@@ -99,6 +106,53 @@
                     {% endfor %} 
                 {% endif %} 
             {% endwith %}
+
+            <hr>
+            <h2>ADD NOTES BY EXCEL FILE</h2>
+            <div>Your excel file should have the titles with "Course", "Content Type", "Title", "Content". <br>
+                Sample excel file might look like:
+                <table style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td>Course</td>
+                            <td>Content Type</td>
+                            <td>Title</td>
+                            <td>Content</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>MATH237</td>
+                            <td>Definition</td>
+                            <td>Subgroup</td>
+                            <td>A subset S of group G is a subgroup if it preserves closure under the operation in G</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form
+                action="{{url_for('fileConvert.convert')}}"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                <input type="file" name="file" />
+                <input type="submit" value="PREVIEW"></input>
+            </form>
         </div>
 
         <div id="ViewNotes" class="main">
