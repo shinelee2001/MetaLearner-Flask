@@ -9,6 +9,20 @@
             type="text/css"
             href="{{url_for('static', filename='style.css')}}"
         />
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [
+                        ['$', '$', '$$', '$$'],
+                        ['\\(', '\\)', '\\[', '\\]'],
+                    ],
+                },
+            };
+        </script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
     </head>
     <body>
         <div id="nav">
@@ -93,9 +107,11 @@
                 <label for="title">Title:</label>
                 <textarea name="title" id="title"></textarea>
                 <label for="content">Content:</label>
-                <textarea name="content" id="content">When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-                    \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]</textarea>
+                <textarea name="content" id="content" placeholder="When $a \ne 0$, there are two solutions to $ax^2 + bx + c = 0$ and they are
+                $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$"></textarea>
                 <br /><br />
+                LaTex View:
+                <div id="latex"></div>
                 <input type="submit" value="SAVE" />
             </form>
 
@@ -146,7 +162,7 @@
                 </table>
             </div>
             <form
-                action="{{url_for('fileConvert.convert')}}"
+                action="{{url_for('fileConvert.preview')}}"
                 method="POST"
                 enctype="multipart/form-data"
             >
@@ -332,5 +348,6 @@
         <script src="{{ url_for('static', filename='courseModifier.js') }}"></script>
         <script src="{{ url_for('static', filename='navModifier.js') }}"></script>
         <script src="{{ url_for('static', filename='carouselModifier.js') }}"></script>
+        <script src="{{ url_for('static', filename='latexDisplay.js') }}"></script>
     </body>
 </html>

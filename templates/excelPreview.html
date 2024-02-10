@@ -11,6 +11,7 @@
         />
     </head>
     <body>
+        <a href="/">Back to main page</a>
         {% block content %}
             {% for index, note in notes.iterrows() %}
             <h3>Course: {{ note['course'] }}</h3>
