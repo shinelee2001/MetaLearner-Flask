@@ -37,6 +37,86 @@ body {
     background-color: #0056b3;
 }
 
+/* main */
+
+#main {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#main h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+#main p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 20vh;
+}
+
+.slide {
+    display: none;
+    margin: 0 auto;
+    width: 80vw;
+    background-color: #007bff;
+    height: 20vh;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+}
+
+.slide header {
+    padding: 20px 0px;
+    font-size: xx-large;
+}
+
+.slide p {
+    padding: 0px 5px 20px;
+    font-size:medium;
+}
+
+.active {
+    display:block;
+}
+
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.carousel button:hover {
+    background-color: #0056b3;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
 /* AddNotes */
 #AddNotes {
     background-color: #f9f9f9;
@@ -88,8 +168,11 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-#AddNotes textarea {
+#AddNotes #content {
     min-height: 100px;
+}
+
+#AddNotes textarea {
     width: calc(100% - 20px);
 }
 
@@ -115,14 +198,12 @@ body {
 
 /* Style the select element */
 #AddNotes select {
-    width: 100%;
+    width: 70%;
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    appearance: none;
-    -webkit-appearance: none;
     background-color: #fff;
     color: #333;
     font-size: 16px;

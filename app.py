@@ -1,10 +1,10 @@
 from flask import Flask
-from study_routes import study_bp
+from main_routes import main_bp
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-app.register_blueprint(study_bp)
+app.register_blueprint(main_bp)
 
 
 if __name__ == "__main__":

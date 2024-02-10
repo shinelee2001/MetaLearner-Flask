@@ -11,15 +11,45 @@
         />
     </head>
     <body>
-        <h1>1,4,7,14 Studying</h1>
-        <h3>Revise what you have learned so far every 1,4,7,14 days!</h3>
-
         <div id="nav">
             <a href="#main">Main</a>
             <a href="#addNotes">Add Notes</a>
             <a href="#viewNotes">View Notes</a>
             <a href="#commingUp">Comming Up</a>
             <a href="#quiz">QUIZ</a>
+        </div>
+
+        <div id="main" class="main">
+            <h1>Welcome!</h1>
+            <p>
+                Do you often forget what you learned in class? Then this is the perfect place for you!<br>
+                You just add notes, we will show them every 1, 4, 7 and 14 days so that they remains in your long-term memory!
+            </p>
+
+            <h1>See what features are available!</h1>
+            <div class="carousel">
+                <div class="slide active">
+                    <header>Add Notes</header>
+                    <p>You just add notes, <br>
+                        we will take care of them on behalf of you</p>
+                </div>
+                <div class="slide">
+                    <header>View Notes</header>
+                    <p>Do you want to see what you added so far? <br>
+                        Of course you can!</p>
+                </div>
+                <div class="slide">
+                    <header>Comming Up</header>
+                    <p>Check what is comming up for <br>
+                        day 1, day4, ... , day 14 notes!</p>
+                </div>
+                <div class="slide">
+                    <header>Quiz</header>
+                    <p>Needs to be updated</p>
+                </div>
+                <button class="prev" onclick="prevSlide()"><</button>
+                <button class="next" onclick="nextSlide()">></button>
+            </div>
         </div>
 
         <div id="AddNotes" class="main">
@@ -31,7 +61,7 @@
             </form>
 
             <form
-                action="{{url_for('study.save')}}"
+                action="{{url_for('main.save')}}"
                 method="POST"
                 enctype="multipart/form-data"
             >
@@ -39,9 +69,10 @@
                 <select name="course" id="course">
                     <option>Select The Course</option>
                     {% for course_name in course_names %}
-                    <option>{{course_name[0]}}</option>
+                        <option>{{course_name[0]}}</option>
                     {% endfor %}
                 </select>
+                <br />
                 <label for="contentType">Content Type:</label>
                 <select name="contentType" id="contentType">
                     <option>Definition</option>
@@ -52,16 +83,22 @@
                     <option>Note(Extras)</option>
                 </select>
                 <br /><br />
+                <label for="title">Title:</label>
+                <textarea name="title" id="title"></textarea>
                 <label for="content">Content:</label>
-                <textarea name="content" id="content"></textarea>
+                <textarea name="content" id="content">When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                    \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]</textarea>
                 <br /><br />
                 <input type="submit" value="SAVE" />
             </form>
 
-            {% with messages = get_flashed_messages(with_categories=true) %} {%
-            if messages %} {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">{{ message }}</div>
-            {% endfor %} {% endif %} {% endwith %}
+            {% with messages = get_flashed_messages(with_categories=true) %} 
+                {% if messages %} 
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %} 
+                {% endif %} 
+            {% endwith %}
         </div>
 
         <div id="ViewNotes" class="main">
@@ -72,53 +109,174 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Content Type</th>
+                        <th>Type</th>
+                        <th>Title</th>
                         <th>Contents</th>
                         <th>Date Created</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for row in study_data %} {% if row[3] == course_name[0]
-                    %}
-                    <tr>
-                        <td>{{ row[0] }}</td>
-                        <td>{{ row[1] }}</td>
-                        <td>{{ row[2] }}</td>
-                    </tr>
-                    {% endif %} {% endfor %}
+                    {% for row in notes_data %} 
+                        {% if row[4] == course_name[0] %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                        </tr>
+                        {% endif %} 
+                    {% endfor %}
                 </tbody>
             </table>
             {%endfor%}
         </div>
 
         <div id="CommingUp" class="main">
-            <h2>Comming Up</h2>
-            <h3>Course:</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Day ~1</th>
-                        <th>Day (2~)4</th>
-                        <th>Day (5~)7</th>
-                        <th>Day (8~)14</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for data in data_by_date[0]%}
-                    <tr>
-                        <td>{{data_by_date[0]}}</td>
-                        <td>{{data_by_date[1]}}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <h2>Day ~1</h2>
+            {% for course_name in course_names %}
+                {% set course_data = [] %}
+                {% for data in date_diff_one %}
+                    {% if data[4] == course_name[0] %}
+                        {% set course_data = course_data.append(data) %}
+                    {% endif %}
+                {% endfor %}
+                {% if course_data %}
+                    <h3>Course: {{ course_name[0] }}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <th>Date Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in course_data %}
+                                <tr>
+                                    <td>{{ data[0] }}</td>
+                                    <td>{{ data[1] }}</td>
+                                    <td>{{ data[2] }}</td>
+                                    <td>{{ data[3] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>NO DATA AVAILABLE</p>
+                {% endif %}
+            {% endfor %}
+
+
+            <h2>Day ~4</h2>
+            {% for course_name in course_names %}
+                {% set course_data = [] %}
+                {% for data in date_diff_four %}
+                    {% if data[4] == course_name[0] %}
+                        {% set course_data = course_data.append(data) %}
+                    {% endif %}
+                {% endfor %}
+                {% if course_data %}
+                    <h3>Course: {{ course_name[0] }}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <th>Date Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in course_data %}
+                                <tr>
+                                    <td>{{ data[0] }}</td>
+                                    <td>{{ data[1] }}</td>
+                                    <td>{{ data[2] }}</td>
+                                    <td>{{ data[3] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>NO DATA AVAILABLE</p>
+                {% endif %}
+            {% endfor %}
+
+            <h2>Day ~7</h2>
+            {% for course_name in course_names %}
+                {% set course_data = [] %}
+                {% for data in date_diff_seven %}
+                    {% if data[4] == course_name[0] %}
+                        {% set course_data = course_data.append(data) %}
+                    {% endif %}
+                {% endfor %}
+                {% if course_data %}
+                    <h3>Course: {{ course_name[0] }}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <th>Date Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in course_data %}
+                                <tr>
+                                    <td>{{ data[0] }}</td>
+                                    <td>{{ data[1] }}</td>
+                                    <td>{{ data[2] }}</td>
+                                    <td>{{ data[3] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>NO DATA AVAILABLE</p>
+                {% endif %}
+            {% endfor %}
+
+            <h2>Day ~14</h2>
+            {% for course_name in course_names %}
+                {% set course_data = [] %}
+                {% for data in date_diff_fourteen %}
+                    {% if data[4] == course_name[0] %}
+                        {% set course_data = course_data.append(data) %}
+                    {% endif %}
+                {% endfor %}
+                {% if course_data %}
+                    <h3>Course: {{ course_name[0] }}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <th>Date Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in course_data %}
+                                <tr>
+                                    <td>{{ data[0] }}</td>
+                                    <td>{{ data[1] }}</td>
+                                    <td>{{ data[2] }}</td>
+                                    <td>{{ data[3] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>NO DATA AVAILABLE</p>
+                {% endif %}
+            {% endfor %}
         </div>
 
         <div id="Quiz" class="main">Content for Quiz</div>
-
         <script src="{{ url_for('static', filename='courseModifier.js') }}"></script>
         <script src="{{ url_for('static', filename='navModifier.js') }}"></script>
+        <script src="{{ url_for('static', filename='carouselModifier.js') }}"></script>
     </body>
 </html>

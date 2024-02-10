@@ -18,7 +18,10 @@ function navController() {
             divEls.forEach((div) => {
                 div.style.display = 'none';
             });
-            if (hash == '#addNotes') {
+            if (hash == '#main') {
+                const content = document.getElementById('main');
+                content.style.display = '';
+            } else if (hash == '#addNotes') {
                 const content = document.getElementById('AddNotes');
                 content.style.display = '';
             } else if (hash == '#viewNotes') {
@@ -40,6 +43,11 @@ function navController() {
 
     // activate main by default
     activate(mainElHash);
+    divEls.forEach((div) => {
+        div.style.display = 'none';
+    });
+    const content = document.getElementById('main');
+    content.style.display = '';
 }
 
 navController();
