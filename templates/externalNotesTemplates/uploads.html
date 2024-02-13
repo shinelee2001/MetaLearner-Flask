@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Manage External Files</title>
+    </head>
+    <body>
+        <form
+                action="{{url_for('externalNotes.save')}}"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                <input type="file" name="file" />
+                <input type="submit" value="UPLOAD"></input>
+            </form>
+            <div>{{ result }}</div>
+            {% with messages = get_flashed_messages(with_categories=true) %} 
+                {% if messages %} 
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %} 
+                {% endif %} 
+            {% endwith %}
+            <div>
+                <h2>List of Files</h2>
+            </div>
+    </body>
+</html>

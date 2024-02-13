@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, request
 from DB_handler import create_db_table
 from datetime import datetime
 import pandas as pd
-import sqlite3
 
 fileConvert_bp = main_bp = Blueprint("fileConvert", __name__)
 
