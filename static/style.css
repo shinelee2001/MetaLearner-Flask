@@ -74,7 +74,7 @@ body {
 
 .slide div {
     padding: 20px 0px 0px;
-    font-size:200%;
+    font-size: 200%;
 }
 
 .slide p {
@@ -240,6 +240,32 @@ body {
 
 #AddNotes input[type='submit']:hover {
     background-color: #0056b3;
+}
+
+#excelView table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+#excelView th,
+#excelView td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#excelView th {
+    background-color: #f2f2f2;
+}
+
+#excelView tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#excelView th:first-child,
+#excelView td:first-child {
+    text-align: center;
+    min-width: 60px;
 }
 
 /* ViewNotes */
