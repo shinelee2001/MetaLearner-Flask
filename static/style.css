@@ -5,6 +5,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Navbar */
@@ -13,8 +16,7 @@ body {
     overflow: hidden;
 }
 
-#nav a,
-header .container a {
+#nav a {
     float: left;
     color: #fff;
     text-align: center;
@@ -62,22 +64,20 @@ header .container a {
 
 .slide {
     display: none;
-    margin: 0 auto;
     width: 100%;
     background-color: #007bff;
     height: 20vh;
     text-align: center;
     color: white;
     border-radius: 10px;
-    font-size: xx-large;
 }
 
 .slide div {
     padding: 20px 0px 0px;
+    font-size:200%;
 }
 
 .slide p {
-    padding: 0px 0px 5px;
     font-weight: bold;
 }
 
@@ -331,12 +331,28 @@ header h1 {
     font-size: 24px;
 }
 
+header .container a {
+    float: left;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
 /* Footer */
 footer {
     background-color: #0056b3;
     color: white;
     padding: 20px 0;
     text-align: center;
+    margin-top: auto;
+}
+
+footer .container {
+    width: 100%;
+    margin: 0 auto;
 }
 
 footer p {
